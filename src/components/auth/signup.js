@@ -11,11 +11,16 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 )
 
 class Signup extends Component {
+  handleFormSubmit(formProps) {
+    // Call action creator to sign up the user!
+    this.props.signupUser(formProps);
+  }
+
   render() {
     const { handleSubmit, fields: { email, password, passwordConfirm }} = this.props;
 
     return (
-      <form>
+      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         <Field name="email" type="text" component={renderField} label="Email" />
         <Field name="password" type="password" component={renderField} label="Password" />
         <Field name="passwordConfirm" type="password" component={renderField} label="Confirm Password" />
